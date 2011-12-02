@@ -1,11 +1,11 @@
 
 %define name	libbluray
-%define version	0.0.1
+%define version	0.2.1
 %define pre	pre
-%define snap	20100917
+%define snap	20111203
 %define rel	1
 
-%define major	0
+%define major	1
 %define libname	%mklibname bluray %major
 %define devname %mklibname bluray -d
 
@@ -18,12 +18,13 @@ Group:		System/Libraries
 URL:		http://www.videolan.org/developers/libbluray.html
 # git://git.videolan.org/libbluray.git
 # git archive --prefix=libbluray-$(date +%Y%m%d)/ --format=tar HEAD | xz > libbluray-$(date +%Y%m%d).tar.xz
-Source:		%{name}-%{snap}.tar.xz
+Source:		%{name}-%{snap}.tar.bz2
 # use our default java home if $JAVA_HOME not set at runtime
 Patch1:		libbluray-default-java-home.patch
-BuildRoot:	%{_tmppath}/%{name}-root
 BuildRequires:	java-rpmbuild
 BuildRequires:	ant
+BuildRequires:	xerces-j2
+BuildRequires:	jaxp
 
 %description
 libbluray is an open-source library designed for Blu-Ray Discs playback for
@@ -93,27 +94,20 @@ export JAVA_HOME=%{java_home}
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 install -d -m755 %{buildroot}%{_javadir}
 install -m644 src/.libs/libbluray.jar %{buildroot}%{_javadir}
 
 rm %{buildroot}%{_libdir}/*.*a
 
-%clean
-rm -rf %{buildroot}
-
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/%{name}.so.%{major}*
 
 %files java
-%defattr(-,root,root)
 %{_javadir}/%{name}.jar
 
 %files -n %{devname}
-%defattr(-,root,root)
-%doc README.txt TODO.txt
+%doc README.txt
 %{_includedir}/%{name}
 %{_libdir}/%{name}.so
 %{_libdir}/pkgconfig/%{name}.pc
