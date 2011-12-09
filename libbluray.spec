@@ -1,26 +1,23 @@
-
-%define name	libbluray
-%define version	0.2.1
 %define pre	pre
 %define snap	20111203
-%define rel	1
 
 %define major	1
-%define libname	%mklibname bluray %major
+%define libname	%mklibname bluray %{major}
 %define devname %mklibname bluray -d
 
 Summary:	Blu-Ray Disc playback library for media players
-Name:		%{name}
-Version:	%{version}
-Release:	%mkrel 0.%pre.git%snap.%rel
+Name:		libbluray
+Version:	0.2.1
+Release:	0.%{pre}.git%{snap}.1
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://www.videolan.org/developers/libbluray.html
 # git://git.videolan.org/libbluray.git
 # git archive --prefix=libbluray-$(date +%Y%m%d)/ --format=tar HEAD | xz > libbluray-$(date +%Y%m%d).tar.xz
-Source:		%{name}-%{snap}.tar.bz2
+Source0:	%{name}-%{snap}.tar.bz2
 # use our default java home if $JAVA_HOME not set at runtime
 Patch1:		libbluray-default-java-home.patch
+
 BuildRequires:	java-rpmbuild
 BuildRequires:	ant
 BuildRequires:	xerces-j2
@@ -74,14 +71,11 @@ Provides:	bluray-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
 
 %description -n %{devname}
-libbluray is an open-source library designed for Blu-Ray Discs playback for
-media players, like VLC or MPlayer.
-
 These are the files needed for building programs using libbluray.
 This package does not contain any DRM circumvention functionality.
 
 %prep
-%setup -q -n %{name}-%{snap}
+%setup -qn %{name}-%{snap}
 %apply_patches
 
 %build
@@ -89,16 +83,17 @@ This package does not contain any DRM circumvention functionality.
 export JAVA_HOME=%{java_home}
 ./bootstrap
 %configure2_5x \
+	--disable-static \
 	--with-jdk=%{java_home} \
 	--enable-bdjava
 %make
 
 %install
 %makeinstall_std
+find %{buildroot}%{_libdir} -name '*.la' -type f -delete -print
+
 install -d -m755 %{buildroot}%{_javadir}
 install -m644 src/.libs/libbluray.jar %{buildroot}%{_javadir}
-
-rm %{buildroot}%{_libdir}/*.*a
 
 %files -n %{libname}
 %{_libdir}/%{name}.so.%{major}*
