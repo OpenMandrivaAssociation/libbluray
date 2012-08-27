@@ -102,4 +102,5 @@ install -m644 src/.libs/libbluray.jar %{buildroot}%{_javadir}
 %doc README.txt
 %{_includedir}/%{name}
 %{_libdir}/%{name}.so
+%{_bindir}/bd_info
 %{_libdir}/pkgconfig/%{name}.pc
