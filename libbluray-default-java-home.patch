@@ -1,0 +1,14 @@
+diff --git a/src/libbluray/bdj/bdj.c b/src/libbluray/bdj/bdj.c
+index c14c794..c7f7537 100644
+--- a/src/libbluray/bdj/bdj.c
++++ b/src/libbluray/bdj/bdj.c
+@@ -166,8 +166,7 @@ void* load_jvm()
+ {
+     const char* java_home = getenv("JAVA_HOME"); // FIXME: should probably search multiple directories
+     if (java_home == NULL) {
+-        BD_DEBUG(DBG_BDJ | DBG_CRIT, "JAVA_HOME not set, can't find Java VM.\n");
+-        return NULL;
++    	java_home = "/usr/lib/jvm";
+     }
+ 
+ #ifdef WIN32
