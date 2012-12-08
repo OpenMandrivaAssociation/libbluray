@@ -101,6 +101,25 @@ install -m644 src/.libs/libbluray.jar %{buildroot}%{_javadir}
 %files -n %{devname}
 %doc README.txt
 %{_includedir}/%{name}
-%{_libdir}/%{name}.so
 %{_bindir}/bd_info
+%{_libdir}/%{name}.so
 %{_libdir}/pkgconfig/%{name}.pc
+
+
+%changelog
+* Mon Mar 26 2012 Alexander Khrukin <akhrukin@mandriva.org> 0.2.2-1
++ Revision: 787103
+- version update 0.2.2
+
+* Fri Dec 09 2011 Matthew Dawkins <mattydaw@mandriva.org> 0.2.1-0.pre.git20111203.1
++ Revision: 739503
+- cleaned up spec
+- disabled static build instead of erasing files
+
+  + Alexander Khrukin <akhrukin@mandriva.org>
+    - version update to newest git checkout 20111203
+
+* Fri Sep 17 2010 Anssi Hannula <anssi@mandriva.org> 0.0.1-0.pre.git20100917.1mdv2011.0
++ Revision: 579301
+- initial Mandriva release
+
