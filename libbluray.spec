@@ -8,17 +8,17 @@ Version:	0.2.3
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
-URL:		http://www.videolan.org/developers/libbluray.html
+Url:		http://www.videolan.org/developers/libbluray.html
 # git://git.videolan.org/libbluray.git
 # git archive --prefix=libbluray-$(date +%Y%m%d)/ --format=tar HEAD | xz > libbluray-$(date +%Y%m%d).tar.xz
 Source0:	ftp://ftp.videolan.org/pub/videolan/libbluray/%{version}/%{name}-%{version}.tar.bz2
 # use our default java home if $JAVA_HOME not set at runtime
 Patch1:		libbluray-default-java-home.patch
 
-BuildRequires:	java-rpmbuild
 BuildRequires:	ant
-BuildRequires:	xerces-j2
+BuildRequires:	java-rpmbuild
 BuildRequires:	jaxp
+BuildRequires:	xerces-j2
 
 %description
 libbluray is an open-source library designed for Blu-Ray Discs playback for
@@ -64,7 +64,6 @@ This package does not contain any DRM circumvention functionality.
 Summary:	libbluray development files
 Group:		Development/C
 Provides:	%{name}-devel = %{version}-%{release}
-Provides:	bluray-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
 
 %description -n %{devname}
@@ -75,12 +74,13 @@ This package does not contain any DRM circumvention functionality.
 %setup -q
 %apply_patches
 
-%build
 sed -i 's/AM_CONFIG_HEADER/AC_CONFIG_HEADER/g' configure.ac
 sed -i 's/AM_PROG_CC_STDC/AC_PROG_CC/g' configure.ac
 # for ant
 export JAVA_HOME=%{java_home}
 ./bootstrap
+
+%build
 %configure2_5x \
 	--disable-static \
 	--with-jdk=%{java_home} \
@@ -89,7 +89,6 @@ export JAVA_HOME=%{java_home}
 
 %install
 %makeinstall_std
-find %{buildroot}%{_libdir} -name '*.la' -type f -delete -print
 
 install -d -m755 %{buildroot}%{_javadir}
 install -m644 src/.libs/libbluray.jar %{buildroot}%{_javadir}
@@ -106,22 +105,4 @@ install -m644 src/.libs/libbluray.jar %{buildroot}%{_javadir}
 %{_bindir}/bd_info
 %{_libdir}/%{name}.so
 %{_libdir}/pkgconfig/%{name}.pc
-
-
-%changelog
-* Mon Mar 26 2012 Alexander Khrukin <akhrukin@mandriva.org> 0.2.2-1
-+ Revision: 787103
-- version update 0.2.2
-
-* Fri Dec 09 2011 Matthew Dawkins <mattydaw@mandriva.org> 0.2.1-0.pre.git20111203.1
-+ Revision: 739503
-- cleaned up spec
-- disabled static build instead of erasing files
-
-  + Alexander Khrukin <akhrukin@mandriva.org>
-    - version update to newest git checkout 20111203
-
-* Fri Sep 17 2010 Anssi Hannula <anssi@mandriva.org> 0.0.1-0.pre.git20100917.1mdv2011.0
-+ Revision: 579301
-- initial Mandriva release
 
