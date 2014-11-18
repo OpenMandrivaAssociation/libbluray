@@ -78,7 +78,7 @@ This package does not contain any DRM circumvention functionality.
 
 sed -i 's/AM_CONFIG_HEADER/AC_CONFIG_HEADER/g' configure.ac
 sed -i 's/AM_PROG_CC_STDC/AC_PROG_CC/g' configure.ac
-%ifarch %{armx}
+%ifnarch %{armx}
 # for ant
 export JAVA_HOME=%{java_home}
 ./bootstrap
