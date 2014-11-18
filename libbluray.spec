@@ -82,7 +82,6 @@ export JAVA_HOME=%{java_home}
 
 %build
 %configure \
-	--disable-static \
 	--with-jdk=%{java_home} \
 	--enable-bdjava
 %make
