@@ -81,7 +81,7 @@ export JAVA_HOME=%{java_home}
 ./bootstrap
 
 %build
-%configure2_5x \
+%configure \
 	--disable-static \
 	--with-jdk=%{java_home} \
 	--enable-bdjava
