@@ -15,7 +15,7 @@ Source0:	ftp://ftp.videolan.org/pub/videolan/libbluray/%{version}/%{name}-%{vers
 # use our default java home if $JAVA_HOME not set at runtime
 Patch1:		libbluray-default-java-home.patch
 
-%ifnarch %{arm}
+%ifnarch %{armx}
 BuildRequires:	ant
 BuildRequires:	java-rpmbuild
 BuildRequires:	jaxp
@@ -76,7 +76,6 @@ This package does not contain any DRM circumvention functionality.
 %setup -q
 %apply_patches
 
-%ifnarch %{arm}
 sed -i 's/AM_CONFIG_HEADER/AC_CONFIG_HEADER/g' configure.ac
 sed -i 's/AM_PROG_CC_STDC/AC_PROG_CC/g' configure.ac
 # for ant
@@ -86,7 +85,7 @@ export JAVA_HOME=%{java_home}
 
 %build
 %configure \
-%ifarch %{arm}
+%ifarch %{armx}
 	--disable-bdjava
 %else
 	--with-jdk=%{java_home} \
@@ -98,14 +97,14 @@ export JAVA_HOME=%{java_home}
 %install
 %makeinstall_std
 
-%ifnarch %{arm}
+%ifnarch %{armx}
 install -m644 src/.libs/libbluray.jar -D %{buildroot}%{_javadir}/libbluray.jar
 %endif
 
 %files -n %{libname}
 %{_libdir}/%{name}.so.%{major}*
 
-%ifnarch %{arm}
+%ifnarch %{armx}
 %files java
 %{_javadir}/%{name}.jar
 %endif
