@@ -100,10 +100,6 @@ export JAVA_HOME=%{java_home}
 %install
 %makeinstall_std
 
-%ifnarch %{armx}
-install -m644 src/.libs/libbluray.jar -D %{buildroot}%{_javadir}/libbluray.jar
-%endif
-
 %files -n %{libname}
 %{_libdir}/%{name}.so.%{major}*
 
