@@ -105,7 +105,7 @@ export JAVA_HOME=%{java_home}
 
 %ifnarch %{armx}
 %files java
-%{_javadir}/%{name}.jar
+%{_javadir}/%{name}*.jar
 %endif
 
 %files -n %{devname}
