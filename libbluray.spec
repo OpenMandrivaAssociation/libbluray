@@ -1,11 +1,11 @@
-%define major	1
-%define libname	%mklibname bluray %{major}
+%define major 1
+%define libname %mklibname bluray %{major}
 %define devname %mklibname bluray -d
 
 Summary:	Blu-Ray Disc playback library for media players
 Name:		libbluray
-Version:	0.2.3
-Release:	13
+Version:	0.6.0
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.videolan.org/developers/libbluray.html
@@ -13,7 +13,7 @@ Url:		http://www.videolan.org/developers/libbluray.html
 # git archive --prefix=libbluray-$(date +%Y%m%d)/ --format=tar HEAD | xz > libbluray-$(date +%Y%m%d).tar.xz
 Source0:	ftp://ftp.videolan.org/pub/videolan/libbluray/%{version}/%{name}-%{version}.tar.bz2
 # use our default java home if $JAVA_HOME not set at runtime
-Patch1:		libbluray-default-java-home.patch
+#Patch1:		libbluray-default-java-home.patch
 
 %ifnarch %{armx}
 BuildRequires:	ant
@@ -21,6 +21,8 @@ BuildRequires:	java-rpmbuild
 BuildRequires:	jaxp
 BuildRequires:	xerces-j2
 %endif
+BuildRequires:	pkgconfig(freetype2)
+BuildRequires:	pkgconfig(libxml-2.0)
 
 %description
 libbluray is an open-source library designed for Blu-Ray Discs playback for
@@ -52,7 +54,7 @@ Group:		System/Libraries
 # Maybe switch to suggesting/requiring libbluray-java in the main lib,
 # and dropping these below reqs instead?
 Requires:	java >= 1.6
-Requires:	jpackage-utils
+Requires:	javapackages-tools
 
 %description java
 libbluray is an open-source library designed for Blu-Ray Discs playback for
