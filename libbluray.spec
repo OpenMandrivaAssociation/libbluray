@@ -20,6 +20,7 @@ BuildRequires:	ant
 BuildRequires:	java-rpmbuild
 BuildRequires:	xerces-j2
 %endif
+BuildRequires:	pkgconfig(fontconfig)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(libxml-2.0)
 
