@@ -4,21 +4,20 @@
 
 Summary:	Blu-Ray Disc playback library for media players
 Name:		libbluray
-Version:	0.6.0
-Release:	4
+Version:	0.9.2
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.videolan.org/developers/libbluray.html
 # git://git.videolan.org/libbluray.git
 # git archive --prefix=libbluray-$(date +%Y%m%d)/ --format=tar HEAD | xz > libbluray-$(date +%Y%m%d).tar.xz
-Source0:	ftp://ftp.videolan.org/pub/videolan/libbluray/%{version}/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.videolan.org/pub/videolan/libbluray/%{version}/%{name}-%{version}.tar.bz2
 # use our default java home if $JAVA_HOME not set at runtime
 #Patch1:		libbluray-default-java-home.patch
 
 %ifnarch %{armx}
 BuildRequires:	ant
 BuildRequires:	java-rpmbuild
-BuildRequires:	jaxp
 BuildRequires:	xerces-j2
 %endif
 BuildRequires:	pkgconfig(freetype2)
