@@ -1,10 +1,10 @@
-%define major 1
+%define major 2
 %define libname %mklibname bluray %{major}
 %define devname %mklibname bluray -d
 
 Summary:	Blu-Ray Disc playback library for media players
 Name:		libbluray
-Version:	0.9.3
+Version:	1.0.1
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
