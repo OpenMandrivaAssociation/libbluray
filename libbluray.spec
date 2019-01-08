@@ -89,10 +89,10 @@ export JAVA_HOME=%{java_home}
 %build
 %configure \
 %ifarch %{armx}
-	--disable-bdjava
+	--disable-bdjava-jar
 %else
 	--with-jdk=%{java_home} \
-	--enable-bdjava
+	--enable-bdjava-jar
 %endif
 
 %make
