@@ -19,7 +19,7 @@ Source0:	http://ftp.videolan.org/pub/videolan/libbluray/%{version}/%{name}-%{ver
 BuildRequires:	ant
 BuildRequires:	java-rpmbuild
 BuildRequires:	xerces-j2
-BuildRequires:	java-12-openjdk-devel
+BuildRequires:	jdk-current
 %endif
 BuildRequires:	pkgconfig(fontconfig)
 BuildRequires:	pkgconfig(freetype2)
