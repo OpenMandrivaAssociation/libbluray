@@ -90,7 +90,7 @@ export JDK_HOME="%{_jvmdir}/java-12"
 %ifarch %{armx}
 	--disable-bdjava-jar
 %else
-	--with-java9
+	--with-java9 \
 	--with-jdk=%{java_home} \
 	--enable-bdjava-jar
 %endif
