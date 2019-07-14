@@ -4,7 +4,7 @@
 
 Summary:	Blu-Ray Disc playback library for media players
 Name:		libbluray
-Version:	1.1.1
+Version:	1.1.2
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
