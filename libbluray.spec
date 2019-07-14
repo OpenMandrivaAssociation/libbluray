@@ -4,7 +4,7 @@
 
 Summary:	Blu-Ray Disc playback library for media players
 Name:		libbluray
-Version:	1.1.1
+Version:	1.1.2
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
@@ -19,6 +19,7 @@ Source0:	http://ftp.videolan.org/pub/videolan/libbluray/%{version}/%{name}-%{ver
 BuildRequires:	ant
 BuildRequires:	java-rpmbuild
 BuildRequires:	xerces-j2
+BuildRequires:	java-1.8.0-openjdk-devel
 %endif
 BuildRequires:	pkgconfig(fontconfig)
 BuildRequires:	pkgconfig(freetype2)
@@ -78,11 +79,9 @@ This package does not contain any DRM circumvention functionality.
 %setup -q
 %apply_patches
 
-sed -i 's/AM_CONFIG_HEADER/AC_CONFIG_HEADER/g' configure.ac
-sed -i 's/AM_PROG_CC_STDC/AC_PROG_CC/g' configure.ac
 %ifnarch %{armx}
 # for ant
-export JAVA_HOME=%{java_home}
+export JDK_HOME="%{_jvmdir}/java-1.8.0"
 ./bootstrap
 %endif
 
