@@ -19,7 +19,7 @@ Source0:	http://ftp.videolan.org/pub/videolan/libbluray/%{version}/%{name}-%{ver
 BuildRequires:	ant
 BuildRequires:	java-rpmbuild
 BuildRequires:	xerces-j2
-BuildRequires:	java-9-openjdk-devel
+BuildRequires:	jdk-current
 %endif
 BuildRequires:	pkgconfig(fontconfig)
 BuildRequires:	pkgconfig(freetype2)
@@ -81,7 +81,7 @@ This package does not contain any DRM circumvention functionality.
 
 %ifnarch %{armx}
 # for ant
-export JDK_HOME="%{_jvmdir}/java-9"
+export JDK_HOME="%{_jvmdir}/java-12"
 ./bootstrap
 %endif
 
