@@ -12,13 +12,15 @@ Url:		http://www.videolan.org/developers/libbluray.html
 # git://git.videolan.org/libbluray.git
 # git archive --prefix=libbluray-$(date +%Y%m%d)/ --format=tar HEAD | xz > libbluray-$(date +%Y%m%d).tar.xz
 Source0:	http://ftp.videolan.org/pub/videolan/libbluray/%{version}/%{name}-%{version}.tar.bz2
+# From OpenJDK source tarball, src/java.desktop/share/classes/sun/awt/ConstrainableGraphics.java
+Source1:	ConstrainableGraphics.java
 # use our default java home if $JAVA_HOME not set at runtime
 #Patch1:		libbluray-default-java-home.patch
+Patch2:		libbluray-1.1.2-java12.patch
 
 %ifnarch %{armx}
 BuildRequires:	ant
 BuildRequires:	java-rpmbuild
-BuildRequires:	xerces-j2
 BuildRequires:	jdk-current
 %endif
 BuildRequires:	pkgconfig(fontconfig)
@@ -76,25 +78,39 @@ These are the files needed for building programs using libbluray.
 This package does not contain any DRM circumvention functionality.
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
+
+# First steps to make --enable-bdjava-jar work, but doesn't work
+# because bdj.awt.* calls into java.awt.* private stuff
+mkdir -p src/libbluray/bdj/java/sun/awt
+cp %{S:1} src/libbluray/bdj/java/sun/awt/
+
+mv src/libbluray/bdj/java/java src/libbluray/bdj/java/bdj
+mv src/libbluray/bdj/java-j2se/java src/libbluray/bdj/java-j2se/bdj
+mv src/libbluray/bdj/java-j2me/java src/libbluray/bdj/java-j2me/bdj
+find src/libbluray/bdj -name "*.java" |while read r; do
+	P="`grep '^package java\.' $r |cut -d' ' -f2 |cut -d';' -f1`"
+	if [ -n "$P" ]; then
+		echo "Need to move $r from $P"
+		sed -i -e "/^package java/aimport $P.*;" $r
+		sed -i -e "s/^package java/package bdj/" $r
+	fi
+done
+
+. %{_sysconfdir}/profile.d/90java.sh
 
 %ifnarch %{armx}
 # for ant
-export JDK_HOME="%{_jvmdir}/java-12"
 ./bootstrap
 %endif
 
 %build
-%configure \
-%ifarch %{armx}
-	--disable-bdjava-jar
-%else
-	--with-java9 \
-	--with-jdk=%{java_home} \
-	--enable-bdjava-jar
-%endif
+. %{_sysconfdir}/profile.d/90java.sh
 
+%configure \
+	--disable-bdjava-jar \
+	--with-java9 \
+	--with-jdk="$JAVA_HOME"
 %make
 
 %install
@@ -102,11 +118,6 @@ export JDK_HOME="%{_jvmdir}/java-12"
 
 %files -n %{libname}
 %{_libdir}/%{name}.so.%{major}*
-
-%ifnarch %{armx}
-%files java
-%{_javadir}/%{name}*.jar
-%endif
 
 %files -n %{devname}
 %doc README.txt
