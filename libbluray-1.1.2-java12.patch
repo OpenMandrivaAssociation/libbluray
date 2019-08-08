@@ -1,0 +1,36 @@
+diff -up libbluray-1.1.2/configure.ac.omv~ libbluray-1.1.2/configure.ac
+--- libbluray-1.1.2/configure.ac.omv~	2019-07-16 16:59:22.093178199 +0200
++++ libbluray-1.1.2/configure.ac	2019-07-16 17:00:12.371175760 +0200
+@@ -253,7 +253,7 @@ AS_IF([test "x$use_bdjava_jar" = "xyes"]
+         [with_java9=`echo "$javac_version" | grep -E -q '^javac\ (9|1[0-9])' && echo yes`]
+     ])
+ 
+-    AS_IF([test "x$with_java9" = "xyes" -a "$BDJ_TYPE" != "j2me"], [java_code_version=1.6], [java_code_version=1.4])
++    AS_IF([test "x$with_java9" = "xyes" -a "$BDJ_TYPE" != "j2me"], [java_code_version=1.9], [java_code_version=1.4])
+ ])
+ 
+ AC_DEFINE_UNQUOTED([JAVA_ARCH], ["$java_arch"], ["Defines the architecture of the java vm."])
+diff -up libbluray-1.1.2/configure.omv~ libbluray-1.1.2/configure
+--- libbluray-1.1.2/configure.omv~	2019-07-16 17:00:16.208175573 +0200
++++ libbluray-1.1.2/configure	2019-07-16 17:00:27.525175024 +0200
+@@ -14146,7 +14146,7 @@ fi
+ fi
+ 
+     if test "x$with_java9" = "xyes" -a "$BDJ_TYPE" != "j2me"; then :
+-  java_code_version=1.6
++  java_code_version=1.9
+ else
+   java_code_version=1.4
+ fi
+diff -up libbluray-1.1.2/Makefile.am.omv~ libbluray-1.1.2/Makefile.am
+--- libbluray-1.1.2/Makefile.am.omv~	2019-07-16 17:00:48.336174015 +0200
++++ libbluray-1.1.2/Makefile.am	2019-07-16 17:00:57.567173567 +0200
+@@ -229,7 +229,7 @@ pkginclude_HEADERS = \
+ if USING_BDJAVA_BUILD_JAR
+ 
+ if USING_JAVAC_9
+-java_versions = -Djava_version_asm=1.6 -Djava_version_bdj=1.6
++java_versions = -Djava_version_asm=1.9 -Djava_version_bdj=1.9
+ else
+ java_versions = -Djava_version_asm=1.5 -Djava_version_bdj=1.4
+ endif
