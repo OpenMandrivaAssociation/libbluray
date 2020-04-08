@@ -111,10 +111,10 @@ done
 	--disable-bdjava-jar \
 	--with-java9 \
 	--with-jdk="$JAVA_HOME"
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %files -n %{libname}
 %{_libdir}/%{name}.so.%{major}*
