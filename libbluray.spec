@@ -16,7 +16,7 @@ Source0:	http://ftp.videolan.org/pub/videolan/libbluray/%{version}/%{name}-%{ver
 Source1:	ConstrainableGraphics.java
 # use our default java home if $JAVA_HOME not set at runtime
 #Patch1:		libbluray-default-java-home.patch
-Patch2:		libbluray-1.1.2-java12.patch
+#Patch2:		libbluray-1.1.2-java12.patch
 
 %ifnarch %{armx}
 BuildRequires:	ant
