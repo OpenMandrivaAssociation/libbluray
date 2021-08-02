@@ -4,7 +4,7 @@
 
 Summary:	Blu-Ray Disc playback library for media players
 Name:		libbluray
-Version:	1.2.0
+Version:	1.3.0
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
@@ -123,6 +123,8 @@ done
 %doc README.txt
 %{_includedir}/%{name}
 %{_bindir}/bd_info
+%{_bindir}/bd_list_titles
+%{_bindir}/bd_splice
 %{_libdir}/%{name}.so
 %{_libdir}/pkgconfig/%{name}.pc
 
