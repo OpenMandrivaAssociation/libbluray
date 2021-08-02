@@ -123,6 +123,8 @@ done
 %doc README.txt
 %{_includedir}/%{name}
 %{_bindir}/bd_info
+%{_bindir}/bd_list_titles
+%{_bindir}/bd_splice
 %{_libdir}/%{name}.so
 %{_libdir}/pkgconfig/%{name}.pc
 
