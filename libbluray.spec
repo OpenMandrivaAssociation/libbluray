@@ -5,7 +5,7 @@
 Summary:	Blu-Ray Disc playback library for media players
 Name:		libbluray
 Version:	1.3.0
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.videolan.org/developers/libbluray.html
@@ -51,6 +51,7 @@ For BD-J support, you need to install libbluray-java.
 This package does not contain any DRM circumvention functionality, so you can
 only play unprotected Blu-Ray discs with it as is.
 
+%ifnarch %{armx}
 %package java
 Summary:	BD-J support for libbluray
 Group:		System/Libraries
@@ -66,6 +67,7 @@ media players, like VLC or MPlayer.
 This package contains the BD-J support for libbluray.
 
 This package does not contain any DRM circumvention functionality.
+%endif
 
 %package -n %{devname}
 Summary:	libbluray development files
@@ -80,6 +82,7 @@ This package does not contain any DRM circumvention functionality.
 %prep
 %autosetup -p1
 
+%ifnarch %{armx}
 # First steps to make --enable-bdjava-jar work, but doesn't work
 # because bdj.awt.* calls into java.awt.* private stuff
 mkdir -p src/libbluray/bdj/java/sun/awt
@@ -99,18 +102,20 @@ done
 
 . %{_sysconfdir}/profile.d/90java.sh
 
-%ifnarch %{armx}
 # for ant
 ./bootstrap
 %endif
 
 %build
+%ifnarch %{armx}
 . %{_sysconfdir}/profile.d/90java.sh
+%endif
 
 %configure \
 	--disable-bdjava-jar \
 	--with-java9 \
 	--with-jdk="$JAVA_HOME"
+
 %make_build
 
 %install
@@ -127,4 +132,3 @@ done
 %{_bindir}/bd_splice
 %{_libdir}/%{name}.so
 %{_libdir}/pkgconfig/%{name}.pc
-
