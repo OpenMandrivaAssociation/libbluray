@@ -125,7 +125,7 @@ done
 %{_libdir}/%{name}.so.%{major}*
 
 %files -n %{devname}
-%doc README.txt
+%doc README.*
 %{_includedir}/%{name}
 %{_bindir}/bd_info
 %{_bindir}/bd_list_titles
