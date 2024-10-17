@@ -8,7 +8,7 @@ Version:	1.3.4
 Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
-Url:		http://www.videolan.org/developers/libbluray.html
+Url:		https://www.videolan.org/developers/libbluray.html
 # git://git.videolan.org/libbluray.git
 # git archive --prefix=libbluray-$(date +%Y%m%d)/ --format=tar HEAD | xz > libbluray-$(date +%Y%m%d).tar.xz
 Source0:	http://ftp.videolan.org/pub/videolan/libbluray/%{version}/%{name}-%{version}.tar.bz2
