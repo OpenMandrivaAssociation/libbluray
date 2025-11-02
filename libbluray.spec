@@ -1,4 +1,4 @@
-%define major 2
+%define major 3
 %define libname %mklibname bluray %{major}
 %define devname %mklibname bluray -d
 
