@@ -18,6 +18,7 @@ Source1:	ConstrainableGraphics.java
 #Patch1:		libbluray-default-java-home.patch
 #Patch2:		libbluray-1.1.2-java12.patch
 
+BuildRequires:	meson
 %ifnarch %{armx}
 BuildRequires:	ant
 BuildRequires:	java-rpmbuild
@@ -111,15 +112,15 @@ done
 . %{_sysconfdir}/profile.d/90java.sh
 %endif
 
-%configure \
-	--disable-bdjava-jar \
-	--with-java9 \
-	--with-jdk="$JAVA_HOME"
+%meson \
+	-Dbdj_jar=disabled \
+	-Djava9=true \
+	-Djdk_home="$JAVA_HOME"
 
-%make_build
+%meson_build
 
 %install
-%make_install
+%meson_install
 
 %files -n %{libname}
 %{_libdir}/%{name}.so.%{major}*
