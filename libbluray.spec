@@ -122,6 +122,9 @@ done
 %install
 %meson_install
 
+# remove not wanted
+rm -f %{buildroot}/%{_libdir}/libbluray.a
+
 %files -n %{libname}
 %{_libdir}/%{name}.so.%{major}*
 
