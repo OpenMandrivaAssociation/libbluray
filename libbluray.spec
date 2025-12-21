@@ -19,6 +19,11 @@ Source1:	ConstrainableGraphics.java
 #Patch2:		libbluray-1.1.2-java12.patch
 
 %ifnarch %{armx}
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	ant
 BuildRequires:	java-rpmbuild
 BuildRequires:	jdk-current
