@@ -22,7 +22,7 @@ Source1:	ConstrainableGraphics.java
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool-base
-BuildRequires:	slibtool
+BuildRequires:	libtool
 BuildRequires:	make
 BuildRequires:	ant
 BuildRequires:	javapackages-tools
