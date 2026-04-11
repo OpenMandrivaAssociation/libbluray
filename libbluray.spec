@@ -1,23 +1,24 @@
-%define major 2
+%define major 3
 %define libname %mklibname bluray %{major}
 %define devname %mklibname bluray -d
 
 Summary:	Blu-Ray Disc playback library for media players
 Name:		libbluray
-Version:	1.3.4
-Release:	3
+Version:	1.4.1
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		https://www.videolan.org/developers/libbluray.html
 # git://git.videolan.org/libbluray.git
 # git archive --prefix=libbluray-$(date +%Y%m%d)/ --format=tar HEAD | xz > libbluray-$(date +%Y%m%d).tar.xz
-Source0:	http://ftp.videolan.org/pub/videolan/libbluray/%{version}/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.videolan.org/pub/videolan/libbluray/%{version}/%{name}-%{version}.tar.xz
 # From OpenJDK source tarball, src/java.desktop/share/classes/sun/awt/ConstrainableGraphics.java
 Source1:	ConstrainableGraphics.java
 # use our default java home if $JAVA_HOME not set at runtime
 #Patch1:		libbluray-default-java-home.patch
 #Patch2:		libbluray-1.1.2-java12.patch
 
+BuildRequires:	meson
 %ifnarch %{armx}
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -106,34 +107,25 @@ find src/libbluray/bdj -name "*.java" |while read r; do
 done
 
 . %{_sysconfdir}/profile.d/90java.sh
-
-ln -sf %{_bindir}/libtoolize slibtoolize
-ln -sf %{_bindir}/libtool slibtool
-
-export PATH=$PWD:$PATH
-export LIBTOOLIZE=%{_bindir}/libtoolize
-export LIBTOOL=%{_bindir}/libtool
-# for ant
-./bootstrap
 %endif
 
 %build
 %ifnarch %{armx}
 . %{_sysconfdir}/profile.d/90java.sh
 %endif
-# fake it
-ln -sf %{_bindir}/libtoolize slibtoolize
-ln -sf %{_bindir}/libtool slibtool
-export PATH=$PWD:$PATH
-%configure \
-	--disable-bdjava-jar \
-	--with-java9 \
-	--with-jdk="$JAVA_HOME"
 
-%make_build LIBTOOL=libtool
+%meson \
+	-Dbdj_jar=disabled \
+	-Djava9=true \
+	-Djdk_home="$JAVA_HOME"
+
+%meson_build
 
 %install
-%make_install
+%meson_install
+
+# remove not wanted
+rm -f %{buildroot}/%{_libdir}/libbluray.a
 
 %files -n %{libname}
 %{_libdir}/%{name}.so.%{major}*
