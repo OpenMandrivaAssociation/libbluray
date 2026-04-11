@@ -112,6 +112,11 @@ done
 %endif
 
 %build
+# use libtool instead of slib
+ln -sf %{_bindir}/libtoolize slibtoolize
+export PATH=$PWD:$PATH
+export LIBTOOLIZE=%{_bindir}/libtoolize
+export LIBTOOL=%{_bindir}/libtool
 %ifnarch %{armx}
 . %{_sysconfdir}/profile.d/90java.sh
 %endif
