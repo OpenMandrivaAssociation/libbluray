@@ -25,7 +25,7 @@ BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	make
 BuildRequires:	ant
-BuildRequires:	java-rpmbuild
+BuildRequires:	javapackages-tools
 BuildRequires:	jdk-current
 %endif
 BuildRequires:	pkgconfig(fontconfig)
