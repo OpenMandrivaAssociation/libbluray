@@ -107,16 +107,17 @@ done
 
 . %{_sysconfdir}/profile.d/90java.sh
 
+ln -sf %{_bindir}/libtoolize slibtoolize
+ln -sf %{_bindir}/libtool slibtool
+
+export PATH=$PWD:$PATH
+export LIBTOOLIZE=%{_bindir}/libtoolize
+export LIBTOOL=%{_bindir}/libtool
 # for ant
 ./bootstrap
 %endif
 
 %build
-# use libtool instead of slib
-ln -sf %{_bindir}/libtoolize slibtoolize
-export PATH=$PWD:$PATH
-export LIBTOOLIZE=%{_bindir}/libtoolize
-export LIBTOOL=%{_bindir}/libtool
 %ifnarch %{armx}
 . %{_sysconfdir}/profile.d/90java.sh
 %endif
