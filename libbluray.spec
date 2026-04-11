@@ -102,9 +102,6 @@ find src/libbluray/bdj -name "*.java" |while read r; do
 done
 
 . %{_sysconfdir}/profile.d/90java.sh
-
-# for ant
-./bootstrap
 %endif
 
 %build
