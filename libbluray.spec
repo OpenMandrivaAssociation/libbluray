@@ -4,7 +4,7 @@
 
 Summary:	Blu-Ray Disc playback library for media players
 Name:		libbluray
-Version:	1.4.0
+Version:	1.4.1
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
@@ -21,7 +21,7 @@ Source1:	ConstrainableGraphics.java
 BuildRequires:	meson
 %ifnarch %{armx}
 BuildRequires:	ant
-BuildRequires:	java-rpmbuild
+BuildRequires:	javapackages-tools
 BuildRequires:	jdk-current
 %endif
 BuildRequires:	pkgconfig(fontconfig)
