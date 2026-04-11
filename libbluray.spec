@@ -20,6 +20,11 @@ Source1:	ConstrainableGraphics.java
 
 BuildRequires:	meson
 %ifnarch %{armx}
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	libtool
+BuildRequires:	make
 BuildRequires:	ant
 BuildRequires:	javapackages-tools
 BuildRequires:	jdk-current
