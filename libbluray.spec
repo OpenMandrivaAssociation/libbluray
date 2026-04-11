@@ -1,11 +1,13 @@
 %define major 3
-%define libname %mklibname bluray %{major}
+%define libname %mklibname bluray
+%define oldlibname %mklibname bluray 3
+%define olderlibname %mklibname bluray 2
 %define devname %mklibname bluray -d
 
 Summary:	Blu-Ray Disc playback library for media players
 Name:		libbluray
 Version:	1.4.1
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		https://www.videolan.org/developers/libbluray.html
@@ -47,6 +49,9 @@ only play unprotected Blu-Ray discs with it as is.
 %package -n %{libname}
 Summary:	Blu-Ray Disc playback library for media players
 Group:		System/Libraries
+%rename %{oldlibname}
+%rename %{olderlibname}
+
 
 %description -n %{libname}
 libbluray is an open-source library designed for Blu-Ray Discs playback for
