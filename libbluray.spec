@@ -126,7 +126,7 @@ export LIBTOOL=%{_bindir}/libtool
 	--with-java9 \
 	--with-jdk="$JAVA_HOME"
 
-%make_build
+%make_build LIBTOOL=libtool
 
 %install
 %make_install
