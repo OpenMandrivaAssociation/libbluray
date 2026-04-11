@@ -121,7 +121,10 @@ export LIBTOOL=%{_bindir}/libtool
 %ifnarch %{armx}
 . %{_sysconfdir}/profile.d/90java.sh
 %endif
-
+# fake it
+ln -sf %{_bindir}/libtoolize slibtoolize
+ln -sf %{_bindir}/libtool slibtool
+export PATH=$PWD:$PATH
 %configure \
 	--disable-bdjava-jar \
 	--with-java9 \
