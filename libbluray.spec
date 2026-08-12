@@ -1,4 +1,4 @@
-%define major 3
+%define major 4
 %define libname %mklibname bluray
 %define oldlibname %mklibname bluray 3
 %define olderlibname %mklibname bluray 2
@@ -34,6 +34,8 @@ BuildRequires:	jdk-current
 BuildRequires:	pkgconfig(fontconfig)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(libxml-2.0)
+# Prefer system libudfread (>= 1.2.0); meson can also embed it as a subproject
+BuildRequires:	pkgconfig(libudfread) >= 1.2.0
 
 %description
 libbluray is an open-source library designed for Blu-Ray Discs playback for
@@ -121,7 +123,6 @@ done
 
 %meson \
 	-Dbdj_jar=disabled \
-	-Djava9=true \
 	-Djdk_home="$JAVA_HOME"
 
 %meson_build
